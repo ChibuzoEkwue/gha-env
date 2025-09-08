@@ -31,6 +31,8 @@ jobs:
         run: npm test
       - name: Output information
         run: "echo \"MONGODB_DB_NAME: ${{ env.MONGODB_DB_NAME }}\""
+      - name: Print environment variables
+        run: echo "acction is running on ${{github.environment}} environment"
   deploy:
     needs: test
     runs-on: ubuntu-latest
