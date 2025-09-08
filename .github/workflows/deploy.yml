@@ -32,7 +32,7 @@ jobs:
       - name: Output information
         run: "echo \"MONGODB_DB_NAME: ${{ env.MONGODB_DB_NAME }}\""
       - name: Print environment variables
-        run: "echo \"Running in environment: ${{ job.environment }}\""
+        run:  "echo \"Running in environment: $ENVIRONMENT\""
   deploy:
     needs: test
     runs-on: ubuntu-latest
