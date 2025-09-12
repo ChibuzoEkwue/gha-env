@@ -6,6 +6,7 @@ on:
       - dev
 env:
   MONGODB_DB_NAME: ${{ secrets.MONGODB_DB_NAME }}
+  CACHE_KEY: node-deps
 jobs:
   test:
     environment: testing
@@ -22,7 +23,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.npm
-          key: npm-deps-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ env.CACHE_KEY }}-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
         run: npm ci
       - name: Run server
@@ -38,5 +39,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Output information
+        env:
+          PORT: 3000
         run: |        
-          echo "..."
+          echo "MONGODB_DB_NAME: $MONGODB_DB_NAME"
+          echo "MONGODB_USERNAME: $MONGODB_USERNAME"
+          echo "${{ env.PORT }}"
